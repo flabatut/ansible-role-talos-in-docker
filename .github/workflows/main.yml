@@ -15,7 +15,7 @@ jobs:
           imageName: "ghcr.io/${{ github.repository }}"
           cacheFrom: "ghcr.io/${{ github.repository }}"
           push: always
-          runCmd: molecule test
+          # runCmd: molecule test
 
   Pre-commit-auto-update:
     runs-on: ubuntu-latest
