@@ -1,0 +1,26 @@
+{
+	"name": "talos",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"postStartCommand": {
+		"bypass git unsafe repo protection": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+		"enable pre-commit": "pre-commit install",
+		"ansible-galaxy": "ansible-galaxy install -r requirements.yml"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"MarkLarah.pre-commit-vscode",
+				"redhat.ansible"
+			]
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"minikube": "none" // not needed, skipped
+		}
+	}
+}
