@@ -8,8 +8,8 @@ jobs:
       - name: Pre-build image and run make ci-build in dev container
         uses: devcontainers/ci@v0.3
         with:
-          imageName: "ghcr.io/${{ GITHUB_REPOSITORY }}"
-          cacheFrom: "ghcr.io/${{ GITHUB_REPOSITORY }}"
+          imageName: "ghcr.io/${{ github.repository }}"
+          cacheFrom: "ghcr.io/${{ github.repository }}"
           push: always
           runCmd: molecule test
 
