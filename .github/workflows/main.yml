@@ -1,0 +1,20 @@
+name: GitHub Actions
+on: [push]
+jobs:
+  Ansible-Role-Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: run tests
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: molecule test
+
+  Pre-commit-auto-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: autoupdate pre-commit
+        uses: pre-commit-ci/lite-action@v1.0.2
+        if: always()
