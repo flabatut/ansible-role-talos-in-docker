@@ -4,7 +4,8 @@ FROM mcr.microsoft.com/devcontainers/python:3.12
 COPY --from=talosctl /talosctl /usr/local/bin/talosctl
 COPY --from=yq /usr/bin/yq /usr/local/bin/yq
 
-ADD requirements.txt .
 RUN apt-get update && \
-    apt-get install -y python3-pip libssl-dev libonig-dev && \
-    pip3 install -r requirements.txt
+    apt-get install -y \
+        python3-pip \
+        libssl-dev \
+        libonig-dev

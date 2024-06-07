@@ -6,6 +6,7 @@
 	"postStartCommand": {
 		"bypass git unsafe repo protection": "git config --global --add safe.directory ${containerWorkspaceFolder}",
 		"enable pre-commit": "pre-commit install",
+		"pip packages": "pip install -r requirements.txt",
 		"ansible-galaxy": "ansible-galaxy install -r requirements.yml"
 	},
 	"customizations": {
@@ -17,9 +18,8 @@
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2.11.0": {},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1.1.9": {
 			"minikube": "none" // not needed, skipped
 		}
 	}

@@ -1,7 +1,0 @@
-ansible-dev-tools
-ansible-core
-ansible-lint
-molecule
-molecule-plugins[docker]
-kubernetes
-kubernetes-validate

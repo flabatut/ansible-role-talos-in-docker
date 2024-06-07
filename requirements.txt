@@ -1,0 +1,9 @@
+# pip packages
+ansible-dev-tools==24.5.0
+ansible-core==2.17.0
+ansible-lint==24.6.0
+molecule==24.6.0
+molecule-plugins[docker]==23.5.3
+kubernetes==30.1.0
+kubernetes-validate==1.29.1
+pre-commit==3.7.1
