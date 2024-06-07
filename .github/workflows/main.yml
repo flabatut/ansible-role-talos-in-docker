@@ -4,17 +4,18 @@ jobs:
   Ansible-Role-Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: run tests
+      - uses: actions/checkout@v4
+      - name: Pre-build image and run make ci-build in dev container
         uses: devcontainers/ci@v0.3
         with:
+          imageName: "ghcr.io/${{ GITHUB_REPOSITORY }}"
+          cacheFrom: "ghcr.io/${{ GITHUB_REPOSITORY }}"
+          push: always
           runCmd: molecule test
 
   Pre-commit-auto-update:
     runs-on: ubuntu-latest
     steps:
-      - name: autoupdate pre-commit
-        uses: pre-commit-ci/lite-action@v1.0.2
+      - uses: actions/checkout@v4
+      - uses: pre-commit-ci/lite-action@v1.0.2
         if: always()
