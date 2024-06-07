@@ -1,0 +1,16 @@
+---
+driver:
+  name: default
+platforms:
+  - name: talos
+provisioner:
+  name: ansible
+  ansible_args:
+    - --diff
+    # - -vvv
+    # - -t test
+  log: true
+  options:
+    v: true
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles

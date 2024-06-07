@@ -1,0 +1,25 @@
+---
+- name: Create talos container
+  ansible.builtin.import_tasks: create_container.yml
+
+- name: Create talos config temporary directory
+  ansible.builtin.file:
+    path: "{{ talos_config_dir }}"
+    state: directory
+    mode: "0700"
+
+- name: Generate cilium manifest for talos inline patch
+  ansible.builtin.import_tasks: generate_cilium_manifests.yml
+
+- name: Configure talos
+  ansible.builtin.import_tasks: config_talos.yml
+
+- name: Configure workspace (kubectl|talosctl)
+  ansible.builtin.import_tasks: config_workspace.yml
+
+- name: Configure Cilium
+  kubernetes.core.k8s:
+    state: present
+    template:
+      - path: "cilium.lbippool.yaml.j2"
+    apply: true

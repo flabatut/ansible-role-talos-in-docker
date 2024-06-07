@@ -1,0 +1,10 @@
+---
+- name: Delete a container
+  community.docker.docker_container:
+    name: "{{ talos_cluster_name }}"
+    state: absent
+
+- name: Delete talos config dir
+  ansible.builtin.file:
+    path: "{{ talos_config_dir }}"
+    state: absent

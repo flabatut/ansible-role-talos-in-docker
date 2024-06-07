@@ -1,0 +1,9 @@
+---
+# defaults file for talos
+talos_cluster_name: talos
+talos_cilium_chart_version: "1.15.5"
+talos_kube_api_port: 6443
+talos_lb_ip_pool: "172.18.0.248/29"
+talos_image: ghcr.io/siderolabs/talos:v1.7.4
+talos_node_ip: "{{ talos_container_stat.container.NetworkSettings.IPAddress }}"
+talos_config_dir: "talosconfig.d"

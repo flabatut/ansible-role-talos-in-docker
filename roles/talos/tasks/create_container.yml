@@ -1,0 +1,24 @@
+---
+# https://www.talos.dev/latest/talos-guides/install/local-platforms/docker/#running-talos-in-docker-manually
+- name: Create a container
+  community.docker.docker_container:
+    name: "{{ talos_cluster_name }}"
+    image: "{{ talos_image }}"
+    hostname: "{{ talos_cluster_name }}"
+    state: started
+    privileged: true
+    security_opts:
+      - "seccomp=unconfined"
+    mounts:
+      - { type: "tmpfs", target: "/run" }
+      - { type: "tmpfs", target: "/system" }
+      - { type: "tmpfs", target: "/tmp" }
+      - { type: "volume", target: "/system/state" }
+      - { type: "volume", target: "/var" }
+      - { type: "volume", target: "/etc/cni" }
+      - { type: "volume", target: "/etc/kubernetes" }
+      - { type: "volume", target: "/usr/libexec/kubernetes" }
+      - { type: "volume", target: "/opt" }
+    env:
+      PLATFORM: container
+  register: talos_container_stat
