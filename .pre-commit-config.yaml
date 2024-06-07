@@ -6,7 +6,6 @@ repos:
     hooks:
       - id: check-yaml
         args: [--unsafe]
-      - id: debug-statements
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
@@ -14,10 +13,23 @@ repos:
     rev: v24.6.0 # put latest release tag from https://github.com/ansible/ansible-lint/releases/
     hooks:
       - id: ansible-lint
-        verbose: true
+        name: Lint Ansible
+        # verbose: true
 
   # gitleaks
   - repo: https://github.com/zricethezav/gitleaks
     rev: v8.18.3
     hooks:
       - id: gitleaks
+        name: Look for leaks in git
+
+  # hadolint
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+        name: Lint Dockerfiles
+        description: Runs hadolint Docker image to lint Dockerfiles
+        language: docker_image
+        types: ["dockerfile"]
+        entry: ghcr.io/hadolint/hadolint hadolint --ignore DL3008 --no-color .devcontainer/Dockerfile
