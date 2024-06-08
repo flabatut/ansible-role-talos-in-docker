@@ -5,7 +5,7 @@ on:
   push:
 
 jobs:
-  Ansible-Role-Test:
+  Build-Devcontainer:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,15 +24,23 @@ jobs:
           cacheFrom: "ghcr.io/${{ github.repository }}"
           push: always
 
-      - name: Run make ci-build in dev container
-        uses: devcontainers/ci@v0.3
-        with:
-          # [Optional] If you have a separate workflow like the one above
-          # to pre-build your container image, you can reference it here
-          # to speed up your application build workflows as well!
-          cacheFrom: "ghcr.io/${{ github.repository }}"
-          push: never
-          runCmd: molecule test
+
+  Ansible-Role-Test:
+    needs: Build-Devcontainer
+    runs-on: ubuntu-latest
+    container:
+      image: "ghcr.io/${{ github.repository }}"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install pip packages
+        run: pip install -r requirements.txt
+
+      - name: install ansible galaxy dependencies
+        run: ansible-galaxy install -r requirements.yml
+
+      - name: run molecule
+        run: molecule test
 
   Pre-commit-auto-update:
     runs-on: ubuntu-latest
