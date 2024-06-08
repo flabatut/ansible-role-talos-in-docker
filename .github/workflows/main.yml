@@ -17,13 +17,22 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Pre-build image and run make ci-build in dev container
+      - name: Pre-build image
         uses: devcontainers/ci@v0.3
         with:
           imageName: "ghcr.io/${{ github.repository }}"
           cacheFrom: "ghcr.io/${{ github.repository }}"
           push: always
-          # runCmd: molecule test
+
+      - name: Run make ci-build in dev container
+        uses: devcontainers/ci@v0.3
+        with:
+          # [Optional] If you have a separate workflow like the one above
+          # to pre-build your container image, you can reference it here
+          # to speed up your application build workflows as well!
+          cacheFrom: "ghcr.io/${{ github.repository }}"
+          push: never
+          runCmd: molecule test
 
   Pre-commit-auto-update:
     runs-on: ubuntu-latest
