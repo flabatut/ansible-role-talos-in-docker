@@ -29,15 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository }}"
-      options: --privileged
     steps:
       - uses: actions/checkout@v4
-
-      - name: install pip packages
-        run: pip install -r requirements.txt
-
-      - name: install ansible galaxy dependencies
-        run: ansible-galaxy install -r requirements.yml
 
       - name: run molecule
         run: molecule test

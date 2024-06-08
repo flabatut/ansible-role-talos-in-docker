@@ -42,6 +42,10 @@
   failed_when: false
   register: result
 
+- name: Debug Check talos status
+  ansible.builtin.debug:
+    msg: "{{ result }}"
+
 - name: Apply talos config
   ansible.builtin.command: >
     talosctl apply-config
