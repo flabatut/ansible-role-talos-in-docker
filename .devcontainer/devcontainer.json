@@ -1,12 +1,11 @@
 {
 	"name": "talos",
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"context": ".."
 	},
 	"postStartCommand": {
 		"bypass git unsafe repo protection": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-		"pip packages": "pip install -r requirements.txt",
-		"ansible-galaxy": "ansible-galaxy install -r requirements.yml",
 		"enable pre-commit": "pre-commit install"
 	},
 	"customizations": {

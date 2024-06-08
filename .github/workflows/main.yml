@@ -24,7 +24,6 @@ jobs:
           cacheFrom: "ghcr.io/${{ github.repository }}"
           push: always
 
-
   Ansible-Role-Test:
     needs: Build-Devcontainer
     runs-on: ubuntu-latest
