@@ -1,4 +1,4 @@
-FROM ghcr.io/siderolabs/talosctl:v1.7.4 AS talosctl
+FROM ghcr.io/siderolabs/talosctl:v1.7.5 AS talosctl
 FROM docker.io/mikefarah/yq:4.44.1 AS yq
 FROM mcr.microsoft.com/devcontainers/python:3.12
 COPY --from=talosctl /talosctl /usr/local/bin/talosctl
